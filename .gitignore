@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------------------
+# Data: the input data are published with the repository and are not ignored.
+# Only large intermediate files are excluded.
+# ---------------------------------------------------------------------------
+data/**/expanded_thread*.csv
+data/**/*.parquet
+data/**/*.feather
+data/**/*.pkl
+
+# ---------------------------------------------------------------------------
+# Outputs: tables, figures and rolling forecasts are committed so that results
+# can be compared with the paper without rerunning. Only run logs are excluded.
+# ---------------------------------------------------------------------------
+outputs/logs/*
+!outputs/logs/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE / editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code local files
+.claude/

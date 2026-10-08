@@ -1,0 +1,333 @@
+ticker,industry
+APA,Oil and gas
+APC,Oil and gas
+CHK,Oil and gas
+CNX,Oil and gas
+COP,Oil and gas
+CVX,Oil and gas
+HAL,Oil and gas
+HP,Oil and gas
+MRO,Oil and gas
+MUR,Oil and gas
+NBR,Oil and gas
+NE,Oil and gas
+NFG,Oil and gas
+NFX,Oil and gas
+OXY,Oil and gas
+PXD,Oil and gas
+RDC,Oil and gas
+RIG,Oil and gas
+SLB,Oil and gas
+SRE,Oil and gas
+TSO,Oil and gas
+VLO,Oil and gas
+XOM,Oil and gas
+ACAS,Finance
+AET,Finance
+AFL,Finance
+AIG,Finance
+AIV,Finance
+AJG,Finance
+ALL,Finance
+AMG,Finance
+AMT,Finance
+AXP,Finance
+BAC,Finance
+BEN,Finance
+BK,Finance
+BXP,Finance
+C,Finance
+CI,Finance
+CINF,Finance
+CME,Finance
+COF,Finance
+FII,Finance
+FITB,Finance
+GS,Finance
+HBAN,Finance
+HCN,Finance
+HCP,Finance
+HIG,Finance
+HRB,Finance
+JNS,Finance
+JPM,Finance
+KEY,Finance
+LNC,Finance
+MBI,Finance
+MET,Finance
+MMC,Finance
+MTG,Finance
+NTRS,Finance
+PFG,Finance
+PLD,Finance
+PNC,Finance
+PRU,Finance
+RF,Finance
+RJF,Finance
+SLM,Finance
+SNV,Finance
+SPG,Finance
+SPY,Finance
+STI,Finance
+STT,Finance
+TMK,Finance
+TROW,Finance
+UDR,Finance
+UNM,Finance
+USB,Finance
+WFC,Finance
+XL,Finance
+ZION,Finance
+AEP,Electricity
+AES,Electricity
+CMS,Electricity
+CNP,Electricity
+FE,Electricity
+LNT,Electricity
+NI,Electricity
+PCG,Electricity
+PEG,Electricity
+PNW,Electricity
+PPL,Electricity
+SO,Electricity
+XEL,Electricity
+AAPL,Technology
+ADBE,Technology
+ADI,Technology
+ADP,Technology
+ADSK,Technology
+AKAM,Technology
+AMD,Technology
+AMZN,Technology
+APH,Technology
+CA,Technology
+CERN,Technology
+CSC,Technology
+CSCO,Technology
+CTSH,Technology
+CTXS,Technology
+CVG,Technology
+FFIV,Technology
+FISV,Technology
+HAR,Technology
+HPQ,Technology
+IBM,Technology
+INTC,Technology
+INTU,Technology
+JBL,Technology
+JNPR,Technology
+KLAC,Technology
+LLL,Technology
+LLTC,Technology
+LMT,Technology
+MCHP,Technology
+MSFT,Technology
+MU,Technology
+NCR,Technology
+NTAP,Technology
+NVDA,Technology
+ORCL,Technology
+QCOM,Technology
+SNPS,Technology
+STX,Technology
+SWKS,Technology
+SYMC,Technology
+TXN,Technology
+UIS,Technology
+VRSN,Technology
+WDC,Technology
+XLNX,Technology
+XRX,Technology
+YHOO,Technology
+CAG,Food
+CCE,Food
+CPB,Food
+GIS,Food
+HSY,Food
+K,Food
+KO,Food
+MKC,Food
+MO,Food
+PEP,Food
+CTAS,Manufacturing
+GCI,Manufacturing
+IP,Manufacturing
+JCI,Manufacturing
+KMB,Manufacturing
+LEG,Manufacturing
+LPX,Manufacturing
+MAS,Manufacturing
+NYT,Manufacturing
+RL,Manufacturing
+WY,Manufacturing
+ABT,Pharma & Chemicals
+AMGN,Pharma & Chemicals
+APD,Pharma & Chemicals
+AVP,Pharma & Chemicals
+BMY,Pharma & Chemicals
+CL,Pharma & Chemicals
+CLX,Pharma & Chemicals
+ENDP,Pharma & Chemicals
+GILD,Pharma & Chemicals
+IFF,Pharma & Chemicals
+JNJ,Pharma & Chemicals
+LLY,Pharma & Chemicals
+MON,Pharma & Chemicals
+MRK,Pharma & Chemicals
+MYL,Pharma & Chemicals
+OLN,Pharma & Chemicals
+PFE,Pharma & Chemicals
+PG,Pharma & Chemicals
+PPG,Pharma & Chemicals
+PRGO,Pharma & Chemicals
+PX,Pharma & Chemicals
+AA,Primary manufacturing
+AKS,Primary manufacturing
+ATI,Primary manufacturing
+COH,Primary manufacturing
+CTB,Primary manufacturing
+GLW,Primary manufacturing
+GT,Primary manufacturing
+NKE,Primary manufacturing
+NWL,Primary manufacturing
+OI,Primary manufacturing
+SNA,Primary manufacturing
+SWK,Primary manufacturing
+TUP,Primary manufacturing
+USG,Primary manufacturing
+UTX,Primary manufacturing
+WOR,Primary manufacturing
+A,Machinery
+AMAT,Machinery
+AME,Machinery
+BA,Machinery
+BC,Machinery
+BGG,Machinery
+BHI,Machinery
+CAT,Machinery
+CMI,Machinery
+COL,Machinery
+FLIR,Machinery
+FOSL,Machinery
+FTI,Machinery
+GD,Machinery
+GE,Machinery
+GRMN,Machinery
+HAS,Machinery
+HON,Machinery
+HRS,Machinery
+IR,Machinery
+ITT,Machinery
+LRCX,Machinery
+MAT,Machinery
+NOC,Machinery
+PBI,Machinery
+PCAR,Machinery
+PKI,Machinery
+ROK,Machinery
+RTN,Machinery
+TEN,Machinery
+TER,Machinery
+TKR,Machinery
+TMO,Machinery
+TXT,Machinery
+WHR,Machinery
+BAX,Health
+BCR,Health
+BDX,Health
+MDT,Health
+MMM,Health
+SYK,Health
+VAR,Health
+XRAY,Health
+ALK,Transportation
+CCI,Transportation
+CCL,Transportation
+CMCSA,Transportation
+CSX,Transportation
+CTL,Transportation
+DISH,Transportation
+EXPD,Transportation
+JBHT,Transportation
+KSU,Transportation
+LUV,Transportation
+LVLT,Transportation
+NSC,Transportation
+TDW,Transportation
+UNP,Transportation
+UPS,Transportation
+VIAB,Transportation
+VZ,Transportation
+ABC,Trade
+ANF,Trade
+AZO,Trade
+BBBY,Trade
+BBY,Trade
+CAH,Trade
+COST,Trade
+CVS,Trade
+DLTR,Trade
+FAST,Trade
+FL,Trade
+GPC,Trade
+GPS,Trade
+GWW,Trade
+HD,Trade
+HSIC,Trade
+JCP,Trade
+JWN,Trade
+KMX,Trade
+KR,Trade
+KSS,Trade
+LOW,Trade
+MCD,Trade
+MCK,Trade
+ORLY,Trade
+PDCO,Trade
+RAD,Trade
+ROST,Trade
+SBUX,Trade
+SHW,Trade
+SPLS,Trade
+SVU,Trade
+SYY,Trade
+TGT,Trade
+TIF,Trade
+TSCO,Trade
+URBN,Trade
+WEN,Trade
+WMT,Trade
+YUM,Trade
+ACN,Services
+ADS,Services
+APOL,Services
+EBAY,Services
+ESRX,Services
+FLR,Services
+IGT,Services
+INCY,Services
+IPG,Services
+IT,Services
+KBH,Services
+LEN,Services
+LH,Services
+MAR,Services
+MCO,Services
+NFLX,Services
+OMC,Services
+PAYX,Services
+PCLN,Services
+PHM,Services
+PWR,Services
+R,Services
+RCL,Services
+RHI,Services
+SEE,Services
+SRCL,Services
+THC,Services
+TWX,Services
+UHS,Services
+URI,Services
+WYNN,Services
+NEM,Mining
+VMC,Mining

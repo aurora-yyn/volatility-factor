@@ -1,0 +1,4 @@
+# Normalize line endings for text files; keep binary files untouched
+* text=auto
+*.png binary
+*.gz binary
