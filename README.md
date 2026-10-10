@@ -6,7 +6,7 @@ Replication code and data for
 > *International Journal of Forecasting*.
 
 The package reproduces all tables and figures in the main text of the paper, together with
-Appendix Tables A.17, A.18, G.27 and Appendix Figure H.17.
+supporting results reported in the Appendix.
 
 ## Package information
 
