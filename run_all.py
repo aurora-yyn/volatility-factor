@@ -42,10 +42,14 @@ STEPS = [
     ("06_information_content/incremental_correlation.py", [], "Table 11, Figure 8"),
     ("06_information_content/industry_factors.py", [], "Table 12"),
     ("06_information_content/incremental_predictability.py", [], "Table 13"),
-    ("06_information_content/factor_loadings_plot.py", [], "Figure 7"),
+    ("06_information_content/factor_loadings_plot.py", [], "Figures 7, B.9, B.10, F.13–F.16"),
     ("06_information_content/standalone_predictors.py", [], "Table G.27"),
     ("07_extensions/component_factors.py", [], "Tables 14, 15"),
     ("07_extensions/partial_variance_factors.py", [], "Table 16"),
+    ("02_data_description/sector_composition_plot.py", [], "Figure 3"),
+    ("07_extensions/component_factor_counts.py", [], "Figures E.11, E.12"),
+    ("07_extensions/component_robustness.py", ["--jobs", "4"], "Tables C.19–C.22, D.23"),
+    ("07_extensions/component_summary_statistics.py", [], "Tables F.24–F.26"),
 ]
 
 

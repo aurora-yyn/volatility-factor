@@ -10,6 +10,7 @@ Sample period: 2 January 2004 to 31 December 2016. All realized volatilities (RV
 | `raw/industry_mapping.csv` | Industry of each of the 332 stocks (14 SIC industries) |
 | `raw/predictors/vix.csv`, `epu.csv`, `skew.csv` | VIX, Economic Policy Uncertainty index (EPU), SKEW index |
 | `raw/decomposition/continuous_rv.csv.gz`, `jump_rv.csv.gz` | Continuous and jump components of the 332 stocks' RV (§6.1) |
+| `raw/decomposition/continuous_rv_tau{4,4.5,5.5,6}.csv.gz`, `jump_rv_tau{4,4.5,5.5,6}.csv.gz` | The same components for jump-test thresholds τ = 4, 4.5, 5.5 and 6, 2004–2014 (Appendix C); the files without a suffix use τ = 5 |
 | `raw/decomposition/good_rv.csv.gz`, `bad_rv.csv.gz` | Upside and downside realized variances of the 332 stocks (§6.2) |
 | `raw/decomposition/partial_rv.csv.gz` | Five realized partial variances of the S&P 500 index (§6.3) |
 

@@ -5,21 +5,21 @@ Replication code and data for
 > Ye, W., Yun, Y., & Wu, B. (2026). The Information Content of Realized Volatility Factors.
 > *International Journal of Forecasting*.
 
-The package reproduces all tables and figures in the main text of the paper, together with
-supporting results reported in the Appendix.
+The package reproduces all tables and figures in the main text and in the Appendix of the paper.
 
 ## Package information
 
 | | |
 |---|---|
-| Assembled | 9 October 2026 |
+| Assembled | 9 October 2026; updated 22 October 2026 |
 | Prepared by | Yining Yun |
 | Contact | Bin Wu (corresponding author), bin.w@ustc.edu.cn |
 
 ## Special requirements
 
 **None.** The code runs on a standard laptop: no GPU, cluster, or parallel computing setup is needed,
-and 16 GB of RAM is sufficient. The full pipeline takes about 2 hours 40 minutes; see
+and 16 GB of RAM is sufficient (step 25 runs four processes in parallel on the local machine). The full
+pipeline takes about 3 hours 20 minutes; see
 [Expected runtime](#expected-runtime). There are no manual steps.
 
 ## Computing environment
@@ -70,6 +70,7 @@ All realized volatilities (RV) are annualized. CSV files are plain text; `.csv.g
 | `industry_mapping.csv` | Industry of each of the 332 stocks (14 SIC industries) |
 | `predictors/vix.csv`, `epu.csv`, `skew.csv` | VIX, Economic Policy Uncertainty index (EPU), SKEW index |
 | `decomposition/continuous_rv.csv.gz`, `jump_rv.csv.gz` | Continuous and jump components of the stocks' RV (§6.1) |
+| `decomposition/continuous_rv_tau{4,4.5,5.5,6}.csv.gz`, `jump_rv_tau{4,4.5,5.5,6}.csv.gz` | The same components for jump-test thresholds τ = 4, 4.5, 5.5 and 6, 2004–2014 (Appendix C); the files without a suffix use τ = 5 |
 | `decomposition/good_rv.csv.gz`, `bad_rv.csv.gz` | Upside and downside realized variances of the stocks (§6.2) |
 | `decomposition/partial_rv.csv.gz` | Five realized partial variances of the S&P 500 index (§6.3) |
 
@@ -137,7 +138,7 @@ All commands are run from the repository root. To reproduce everything:
 python run_all.py
 ```
 
-This runs the 22 steps below in order and writes a log for each step to `outputs/logs/`.
+This runs the 26 steps below in order and writes a log for each step to `outputs/logs/`.
 `python run_all.py --list` lists the steps; `python run_all.py --from N` resumes from step N.
 Each script can also be run on its own, e.g. `python 02_data_description/basic_statistics.py`.
 
@@ -166,21 +167,22 @@ intermediary forecasts produced in step 1.
 | 16 | Table 11, Figure 8 | `06_information_content/incremental_correlation.py` | < 1 min |
 | 17 | Table 12 | `06_information_content/industry_factors.py` | < 1 min |
 | 18 | Table 13 | `06_information_content/incremental_predictability.py` | ~17 min |
-| 19 | Figure 7 | `06_information_content/factor_loadings_plot.py` | < 1 min |
+| 19 | Figure 7; Figures B.9, B.10, F.13–F.16 | `06_information_content/factor_loadings_plot.py` | < 1 min |
 | 20 | Table G.27 | `06_information_content/standalone_predictors.py` | < 1 min |
 | 21 | Tables 14, 15 | `07_extensions/component_factors.py` | ~54 min |
 | 22 | Table 16 † | `07_extensions/partial_variance_factors.py` | ~4 min |
-
-Figure 3 of the paper (sector composition of the sample) was prepared separately and is not
-produced by the code.
+| 23 | Figure 3 | `02_data_description/sector_composition_plot.py` | < 1 min |
+| 24 | Figures E.11, E.12 | `07_extensions/component_factor_counts.py` | ~4 min |
+| 25 | Tables C.19–C.22, D.23 | `07_extensions/component_robustness.py --jobs 4` | ~33 min |
+| 26 | Tables F.24–F.26 | `07_extensions/component_summary_statistics.py` | < 1 min |
 
 The MCS p-values in Tables 7 and 8 are computed by block bootstrap with a fixed random seed
 (`DEFAULT_SEED = 42` in `src/volfactor/evaluation.py`).
 
 ## Expected runtime
 
-On the machine described above, the full pipeline (`python run_all.py`) takes about 2 hours 40 minutes.
-Most of the time is spent in steps 1, 12, 18 and 21; all other steps finish within a few minutes.
+On the machine described above, the full pipeline (`python run_all.py`) takes about 3 hours 20 minutes.
+Most of the time is spent in steps 1, 12, 18, 21 and 25; all other steps finish within a few minutes.
 Because the intermediary forecasts are included, all steps except 1 can be run directly.
 
 ## Licence

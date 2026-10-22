@@ -2,7 +2,7 @@
 
 | Script | Reproduces |
 |---|---|
-| `factor_loadings_plot.py` | Figure 7 |
+| `factor_loadings_plot.py` | Figure 7; Appendix Figures B.9, B.10, F.13–F.16 |
 | `incremental_correlation.py` | Table 11, Figure 8 |
 | `industry_factors.py` | Table 12 |
 | `incremental_predictability.py` | Table 13 |
