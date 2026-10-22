@@ -87,6 +87,37 @@ def incremental_gc(target: pd.Series, factors: pd.DataFrame) -> tuple[list[str],
     return order, np.array(gcs)
 
 
+def plot_curves(curves: dict[str, tuple[list[str], np.ndarray]], path: Path) -> None:
+    """Figure 8: one panel per factor; the x tick under step m names the industry added at that step."""
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9), sharey=True)
+
+    for ax, (name, (order, gcs)) in zip(axes.flat, curves.items()):
+        m = np.arange(1, len(gcs) + 1)
+        ax.plot(m, gcs, color="#1f4e79", linewidth=2, marker="o", markersize=5)
+        ax.axhline(gcs[-1], color="gray", linestyle=":", linewidth=1)
+
+        ax.set_title(name, fontsize=12)
+        ax.set_xticks(m)
+        ax.set_xticklabels([f"{i}. {SHORT.get(ind, ind)}" for i, ind in zip(m, order)],
+                           rotation=60, ha="right", fontsize=8)
+        ax.set_ylim(0, 1.05)
+        ax.grid(alpha=0.3)
+
+        ax.annotate(f"{gcs[0]:.3f}", (1, gcs[0]), textcoords="offset points",
+                    xytext=(6, -12), fontsize=8)
+        ax.annotate(f"{gcs[-1]:.3f}", (m[-1], gcs[-1]), textcoords="offset points",
+                    xytext=(-10, -14), fontsize=8, ha="right")
+
+    for ax in axes[:, 0]:
+        ax.set_ylabel("Generalized correlation $GC_{k,m}$")
+    fig.supxlabel("Industry factors added in order of $|$correlation$|$ with the volatility factor ($m$ = 1, …, 14)",
+                  fontsize=10)
+
+    fig.tight_layout()
+    fig.savefig(path, dpi=300, bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -106,7 +137,7 @@ def main() -> None:
     for k in range(1, N_FACTORS + 1):
         name = f"VF{k}"
         order, gcs = incremental_gc(vf[name], inds)
-        curves[name] = gcs
+        curves[name] = (order, gcs)
 
         top3 = [(SHORT.get(order[i], order[i]), gcs[i] if i == 0 else None)
                 for i in range(3)]
@@ -139,25 +170,19 @@ def main() -> None:
     path = TABLES_DIR / "incremental_gc_summary.csv"
     table.to_csv(path, index=False)
 
-    # Incremental GC curves
-    fig, ax = plt.subplots(figsize=(8, 5))
-    m = np.arange(1, inds.shape[1] + 1)
-    for name, gcs in curves.items():
-        ax.plot(m, gcs, marker="o", label=name)
+    # Every point of Figure 8: the industry added at step m and the GC after adding it
+    curve_rows = [
+        {"factor": name, "m": i + 1, "industry_added": industry, "gc": gc}
+        for name, (order, gcs) in curves.items()
+        for i, (industry, gc) in enumerate(zip(order, gcs))
+    ]
+    curve_path = TABLES_DIR / "figure8_incremental_gc_curves.csv"
+    pd.DataFrame(curve_rows).to_csv(curve_path, index=False)
 
-    ax.set_xlabel("Number of industry factors included ($m$)")
-    ax.set_ylabel("Generalized correlation $GC_{k,m}$")
-    ax.set_xticks(m)
-    ax.set_ylim(0, 1.02)
-    ax.grid(alpha=0.3)
-    ax.legend(title="Volatility factor")
+    fig_path = FIGURES_DIR / "figure8_incremental_generalized_correlation.png"
+    plot_curves(curves, fig_path)
 
-    fig_path = FIGURES_DIR / "incremental_generalized_correlation.png"
-    fig.tight_layout()
-    fig.savefig(fig_path, dpi=300, bbox_inches="tight", facecolor="white")
-    plt.close(fig)
-
-    print(f"\n-> {path}\n-> {fig_path}")
+    print(f"\n-> {path}\n-> {curve_path}\n-> {fig_path}")
 
 
 if __name__ == "__main__":

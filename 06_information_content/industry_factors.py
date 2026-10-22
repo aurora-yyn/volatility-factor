@@ -12,6 +12,8 @@ The sample ends in 2014, as in the paper; adjust with ``--end-year``. The HAR be
 over the same period.
 
 p-values are two-sided.
+
+The script also reports the correlation between the finance / oil industry factors and VF1 / VF3 quoted in §5.1.
 The "MSPE-adj" column is the mean of the Clark–West adjusted loss differential.
 
 Usage
@@ -37,7 +39,8 @@ from volfactor.evaluation import (
     significance_stars,
 )
 from volfactor.forecast import rolling_ols_forecast
-from volfactor.io import HAR_COLS, load_industry_map, load_panel
+from volfactor.factors import extract_pca
+from volfactor.io import HAR_COLS, load_industry_map, load_panel, stock_columns
 from volfactor.paths import TABLES_DIR, ensure_output_dirs
 
 HORIZONS = (1, 5, 22)
@@ -112,6 +115,29 @@ def run_horizon(horizon: int, window_years: int, end_year: int) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+#: (industry, volatility factor) pairs whose correlation is reported in §5.1
+CORRELATION_PAIRS = [("Finance", "VF1"), ("Oil and gas", "VF3")]
+
+
+def factor_correlations() -> pd.DataFrame:
+    """Pearson correlation between the finance / oil industry factors and VF1 / VF3 (§5.1 text).
+
+    Uses the full 2004–2016 sample and the full-sample PCA factors, the same factors as Figure 7.
+    """
+    X, _ = load_panel(horizon=1)
+    stocks = stock_columns(X)
+    vf, _ = extract_pca(X[stocks], X[stocks], n_factors=4)
+    groups = industry_groups(stocks)
+
+    rows = []
+    print("\n=== Correlation between industry factors and volatility factors (2004–2016) ===")
+    for industry, factor in CORRELATION_PAIRS:
+        corr = abs(X[groups[industry]].mean(axis=1).corr(vf[factor]))
+        rows.append({"industry": INDUSTRY_LABELS[industry], "factor": factor, "abs_corr": corr})
+        print(f"    {INDUSTRY_LABELS[industry]:<8s} industry factor vs {factor}: {corr:.3f}")
+    return pd.DataFrame(rows)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -131,7 +157,11 @@ def main() -> None:
 
     path = TABLES_DIR / "table12_industry_factors.csv"
     pd.concat(frames, ignore_index=True).to_csv(path, index=False)
-    print(f"\n-> {path}")
+
+    corr_path = TABLES_DIR / "section5_industry_factor_correlations.csv"
+    factor_correlations().to_csv(corr_path, index=False)
+
+    print(f"\n-> {path}\n-> {corr_path}")
 
 
 if __name__ == "__main__":
