@@ -63,9 +63,14 @@ PREFIXES = {
 }
 
 
-def run_one(component: str, horizon: int, window_years: int, end_year: int | None):
-    """Out-of-sample performance of the 8 factor models for one (component, horizon) pair."""
-    X, Y = load_component_panel(component, horizon=horizon, end_year=end_year)
+def run_one(component: str, horizon: int, window_years: int, end_year: int | None,
+            eval_end: int | None = -1, **panel_kwargs):
+    """Out-of-sample performance of the 8 factor models for one (component, horizon) pair.
+
+    ``eval_end=-1`` uses the evaluation window of :data:`COMPONENTS`; ``panel_kwargs``
+    (``tau``, ``shift``, ``replace_zeros``) select the panel variants of Appendices C and D.
+    """
+    X, Y = load_component_panel(component, horizon=horizon, end_year=end_year, **panel_kwargs)
 
     benchmark = rolling_ols_forecast(X[HAR_COLS], Y, window_years, name="HAR")
 
@@ -79,7 +84,8 @@ def run_one(component: str, horizon: int, window_years: int, end_year: int | Non
     )
 
     # The evaluation window is set by eval_end in COMPONENTS (§6.2 ends in 2014).
-    eval_end = COMPONENTS[component]["eval_end"]
+    if eval_end == -1:
+        eval_end = COMPONENTS[component]["eval_end"]
     idx = benchmark.index
     if eval_end is not None:
         idx = idx[idx.year <= eval_end]

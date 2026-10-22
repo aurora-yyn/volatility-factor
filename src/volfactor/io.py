@@ -108,8 +108,80 @@ COMPONENTS = {
 }
 
 
+#: Thresholds τ of the jump test (Appendix C). τ = 5 is the main specification
+#: (Table 14); the panels for the other values cover 2004–2014 and are stored as
+#: ``{component}_rv_tau{τ}.csv.gz``.
+TAUS = (4, 4.5, 5, 5.5, 6)
+
+
+def read_component_panel(
+    component: str,
+    tau: float = 5,
+    end_year: int | None = -1,
+    shift: float | None = None,
+    replace_zeros: bool = False,
+) -> pd.DataFrame:
+    """Stock panel of one volatility component before taking logs (§6, Appendices C, D, F).
+
+    Parameters
+    ----------
+    component
+        A key of :data:`COMPONENTS`.
+    tau
+        Jump-test threshold, one of :data:`TAUS`; only used for ``continuous`` / ``jump``.
+    end_year
+        Last year of the panel. ``-1`` uses the component's ``data_end``, ``None`` the
+        full data range.
+    shift
+        Constant added to the panel; ``None`` uses the component's ``shift``.
+    replace_zeros
+        If True, zeros in each column are replaced by the smallest non-zero value of
+        that column before ``shift`` is added (used with ``shift=0`` for ``log(CC)``,
+        Appendix D).
+
+    Returns
+    -------
+    DataFrame
+        Indexed by Date, one column per stock, values ``x + shift`` (not logged).
+    """
+    if component not in COMPONENTS:
+        raise KeyError(
+            f"unknown component {component!r}; choose from {sorted(COMPONENTS)}"
+        )
+    if tau not in TAUS:
+        raise ValueError(f"tau must be one of {TAUS}, got {tau!r}")
+    if tau != 5 and component not in ("continuous", "jump"):
+        raise ValueError("tau only applies to the continuous / jump decomposition")
+
+    spec = COMPONENTS[component]
+    if end_year == -1:
+        end_year = spec["data_end"]
+    if shift is None:
+        shift = spec["shift"]
+
+    name = f"{component}_rv.csv.gz" if tau == 5 else f"{component}_rv_tau{tau:g}.csv.gz"
+    panel = (
+        pd.read_csv(RAW_DIR / "decomposition" / name, parse_dates=["Datetime"])
+        .rename(columns={"Datetime": "Date"})
+        .set_index("Date")
+    )
+    if end_year is not None:
+        panel = panel[panel.index.year <= end_year]
+
+    if replace_zeros:
+        smallest = panel.where(panel != 0).min()
+        panel = panel.mask(panel == 0, smallest, axis=1)
+
+    return panel + shift
+
+
 def load_component_panel(
-    component: str, horizon: Horizon = 1, end_year: int | None = -1
+    component: str,
+    horizon: Horizon = 1,
+    end_year: int | None = -1,
+    tau: float = 5,
+    shift: float | None = None,
+    replace_zeros: bool = False,
 ) -> tuple[pd.DataFrame, pd.Series]:
     """Load the panel and target for one volatility component, on the LV scale (§6).
 
@@ -134,28 +206,21 @@ def load_component_panel(
     end_year
         Last year of the panel. The default ``-1`` uses the component's ``data_end``
         (see :data:`COMPONENTS`); ``None`` uses the full data range; a year overrides it.
+    tau, shift, replace_zeros
+        Passed to :func:`read_component_panel`; the defaults give the main
+        specification of §6.
 
     Returns
     -------
     (X, Y)
         X has columns ``HAR_COLS`` + the component's stock columns; Y is the market LV target.
     """
-    if component not in COMPONENTS:
-        raise KeyError(
-            f"unknown component {component!r}; choose from {sorted(COMPONENTS)}"
-        )
+    if end_year == -1 and component in COMPONENTS:
+        end_year = COMPONENTS[component]["data_end"]
 
-    spec = COMPONENTS[component]
-    if end_year == -1:
-        end_year = spec["data_end"]
-
-    path = RAW_DIR / "decomposition" / f"{component}_rv.csv.gz"
-    panel = (
-        pd.read_csv(path, parse_dates=["Datetime"])
-        .rename(columns={"Datetime": "Date"})
-        .set_index("Date")
+    panel = read_component_panel(
+        component, tau=tau, end_year=None, shift=shift, replace_zeros=replace_zeros
     )
-    panel = panel + spec["shift"]
 
     market = load_market_rv().drop(columns=["RV_final"], errors="ignore") ** 2
 
