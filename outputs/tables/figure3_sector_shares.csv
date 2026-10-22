@@ -1,0 +1,15 @@
+industry,label,n_stocks,share
+Oil and gas,Oil,23,0.06927710843373494
+Finance,Finance,56,0.1686746987951807
+Electricity,Electricity,13,0.0391566265060241
+Technology,Technology,48,0.14457831325301204
+Food,Food,10,0.030120481927710843
+Manufacturing,Manufacturing,11,0.03313253012048193
+Pharma & Chemicals,Pharmaceuticals and chemicals,21,0.06325301204819277
+Primary manufacturing,Primary manufacturing,16,0.04819277108433735
+Machinery,Machinery,35,0.10542168674698796
+Health,Health,8,0.024096385542168676
+Transportation,Transportation,18,0.05421686746987952
+Trade,Trade,40,0.12048192771084337
+Services,Services,31,0.09337349397590361
+Mining,Mining,2,0.006024096385542169
