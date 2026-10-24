@@ -112,7 +112,7 @@ class MultiFactorHARPCA:
             # HAR benchmark
             m_har, _ = self.fit_har_model(Xtr, Y_train, None)
             Xte_har = sm.add_constant(Xte[self.fixed_columns], has_constant="add")
-            res["HAR_benchmark"].append(m_har.predict(Xte_har)[0])
+            res["HAR_benchmark"].append(m_har.predict(Xte_har).iloc[0])
             bic_scores = {"HAR": m_har.bic}
             bic_preds = {"HAR": res["HAR_benchmark"][-1]}
 
@@ -120,7 +120,7 @@ class MultiFactorHARPCA:
             for name, fcols in all_combos.items():
                 m, cols = self.fit_har_model(Xtr, Y_train, fcols)
                 Xte_c = sm.add_constant(Xte[cols], has_constant="add")
-                pred = m.predict(Xte_c)[0]
+                pred = m.predict(Xte_c).iloc[0]
                 res[name].append(pred)
                 bic_scores[name] = m.bic
                 bic_preds[name] = pred
@@ -134,7 +134,7 @@ class MultiFactorHARPCA:
             if sel:
                 m, cols = self.fit_har_model(Xtr, Y_train, sel)
                 Xte_c = sm.add_constant(Xte[cols], has_constant="add")
-                res["HAR_LASSO_selected"].append(m.predict(Xte_c)[0])
+                res["HAR_LASSO_selected"].append(m.predict(Xte_c).iloc[0])
             else:
                 res["HAR_LASSO_selected"].append(res["HAR_benchmark"][-1])
 

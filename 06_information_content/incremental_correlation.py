@@ -133,7 +133,7 @@ def main() -> None:
     inds = industry_factors(panel, load_industry_map())
     print(f"Built {inds.shape[1]} industry factors (first principal component within each industry)\n")
 
-    rows, curves = [], {}
+    rows, curves, note_rows = [], {}, []
     for k in range(1, N_FACTORS + 1):
         name = f"VF{k}"
         order, gcs = incremental_gc(vf[name], inds)
@@ -165,6 +165,12 @@ def main() -> None:
             rank = list(singles.index).index("Finance") + 1
             print(f"        Finance ranks {rank}, GC = {singles['Finance']:.3f}; "
                   f"lowest GC among the 14 industries = {singles.min():.3f}")
+            note_rows.append({
+                "factor": name,
+                "finance_rank": rank,
+                "finance_gc": singles["Finance"],
+                "min_individual_gc": singles.min(),
+            })
 
     table = pd.DataFrame(rows)
     path = TABLES_DIR / "incremental_gc_summary.csv"
@@ -178,6 +184,9 @@ def main() -> None:
     ]
     curve_path = TABLES_DIR / "figure8_incremental_gc_curves.csv"
     pd.DataFrame(curve_rows).to_csv(curve_path, index=False)
+
+    # Values quoted in the notes of Table 11 (Finance in VF1, lowest single-industry GC)
+    pd.DataFrame(note_rows).to_csv(TABLES_DIR / "table11_note_values.csv", index=False)
 
     fig_path = FIGURES_DIR / "figure8_incremental_generalized_correlation.png"
     plot_curves(curves, fig_path)

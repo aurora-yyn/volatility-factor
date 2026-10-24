@@ -19,7 +19,7 @@ The package reproduces all tables and figures in the main text and in the Append
 
 **None.** The code runs on a standard laptop: no GPU, cluster, or parallel computing setup is needed,
 and 16 GB of RAM is sufficient (step 25 runs four processes in parallel on the local machine). The full
-pipeline takes about 3 hours 20 minutes; see
+pipeline takes about 3.5 hours; see
 [Expected runtime](#expected-runtime). There are no manual steps.
 
 ## Computing environment
@@ -149,7 +149,7 @@ intermediary forecasts produced in step 1.
 
 | Step | Output in the paper | Script | Runtime |
 |---|---|---|---|
-| 1 | Rolling forecasts (intermediary) | `04_out_of_sample/build_predictions.py` | ~52 min |
+| 1 | Rolling forecasts (intermediary) | `04_out_of_sample/build_predictions.py` | ~60 min |
 | 2 | Table 1 | `02_data_description/basic_statistics.py` | < 1 min |
 | 3 | Table 2 | `02_data_description/long_memory_test.py` | < 1 min |
 | 4 | Figure 1 | `02_data_description/acf_pacf_plot.py` | < 1 min |
@@ -173,7 +173,7 @@ intermediary forecasts produced in step 1.
 | 22 | Table 16 † | `07_extensions/partial_variance_factors.py` | ~4 min |
 | 23 | Figure 3 | `02_data_description/sector_composition_plot.py` | < 1 min |
 | 24 | Figures E.11, E.12 | `07_extensions/component_factor_counts.py` | ~4 min |
-| 25 | Tables C.19–C.22, D.23 | `07_extensions/component_robustness.py --jobs 4` | ~33 min |
+| 25 | Tables C.19–C.22, D.23 | `07_extensions/component_robustness.py --jobs 4` | ~37 min |
 | 26 | Tables F.24–F.26 | `07_extensions/component_summary_statistics.py` | < 1 min |
 
 The MCS p-values in Tables 7 and 8 are computed by block bootstrap with a fixed random seed
@@ -181,7 +181,7 @@ The MCS p-values in Tables 7 and 8 are computed by block bootstrap with a fixed 
 
 ## Expected runtime
 
-On the machine described above, the full pipeline (`python run_all.py`) takes about 3 hours 20 minutes.
+On the machine described above, the full pipeline (`python run_all.py`) takes about 3.5 hours. Runtimes vary with the machine.
 Most of the time is spent in steps 1, 12, 18, 21 and 25; all other steps finish within a few minutes.
 Because the intermediary forecasts are included, all steps except 1 can be run directly.
 

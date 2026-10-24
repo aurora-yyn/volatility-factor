@@ -4,7 +4,7 @@
 
 Usage
 -----
-    python run_all.py              # run everything (about 2–3 hours)
+    python run_all.py              # run everything (about 3.5 hours)
     python run_all.py --list       # list all steps
     python run_all.py --from 12    # start from step 12
 
@@ -24,7 +24,7 @@ LOG_DIR = ROOT / "outputs" / "logs"
 
 #: (script, arguments, what it reproduces)
 STEPS = [
-    ("04_out_of_sample/build_predictions.py", [], "Rolling forecasts (input of Tables 4, 5, 7–10, 16 and Figures 5, 6)"),
+    ("04_out_of_sample/build_predictions.py", [], "Rolling forecasts (input of Tables 4, 5, 7-10, 16 and Figures 5, 6)"),
     ("02_data_description/basic_statistics.py", [], "Table 1"),
     ("02_data_description/long_memory_test.py", [], "Table 2"),
     ("02_data_description/acf_pacf_plot.py", [], "Figure 1"),
@@ -42,14 +42,14 @@ STEPS = [
     ("06_information_content/incremental_correlation.py", [], "Table 11, Figure 8"),
     ("06_information_content/industry_factors.py", [], "Table 12"),
     ("06_information_content/incremental_predictability.py", [], "Table 13"),
-    ("06_information_content/factor_loadings_plot.py", [], "Figures 7, B.9, B.10, F.13–F.16"),
+    ("06_information_content/factor_loadings_plot.py", [], "Figures 7, B.9, B.10, F.13-F.16"),
     ("06_information_content/standalone_predictors.py", [], "Table G.27"),
     ("07_extensions/component_factors.py", [], "Tables 14, 15"),
     ("07_extensions/partial_variance_factors.py", [], "Table 16"),
     ("02_data_description/sector_composition_plot.py", [], "Figure 3"),
     ("07_extensions/component_factor_counts.py", [], "Figures E.11, E.12"),
-    ("07_extensions/component_robustness.py", ["--jobs", "4"], "Tables C.19–C.22, D.23"),
-    ("07_extensions/component_summary_statistics.py", [], "Tables F.24–F.26"),
+    ("07_extensions/component_robustness.py", ["--jobs", "4"], "Tables C.19-C.22, D.23"),
+    ("07_extensions/component_summary_statistics.py", [], "Tables F.24-F.26"),
 ]
 
 
