@@ -74,7 +74,7 @@ def rolling_ols_forecast(
     Uses the same windows and estimation as :func:`rolling_har_forecast`, but the
     caller supplies the full feature set, which makes it easy to build "HAR plus an
     extra variable" specifications: the industry factors of §5.1, the VIX / EPU / SKEW
-    benchmarks of §5.2, etc.
+    benchmarks of §5.3, etc.
 
     Parameters
     ----------
@@ -133,7 +133,7 @@ def rolling_factor_forecast(
         robustness check of §4.3.3 (Table 10).
     extra
         Additional regressors (same index as ``X``) added for every factor. Used for
-        benchmark 2 in §5.2 — VIX / EPU / SKEW are controlled for on top of HAR before
+        benchmark 2 in §5.3 — VIX / EPU / SKEW are controlled for on top of HAR before
         asking whether the factors add information.
     base_cols
         Fixed regressors, also used as the baseline for the sPCA residuals. Default

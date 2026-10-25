@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Table 5 — out-of-sample R² across volatility regimes (§4.2, regime analysis).
+"""Table 5 — out-of-sample R² across volatility regimes (§4.2.3).
 
 The out-of-sample period is split into three regimes by the **same-day 1-day realized volatility**, and within
 each regime the out-of-sample R² and Clark–West test of every factor relative to HAR are computed:

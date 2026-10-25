@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Table 11, Figure 8 — incremental generalized correlation analysis (§5.1).
+"""Table 11, Figure 8 — incremental generalized correlation analysis (§5.2).
 
 The loading analysis asks which stocks carry the largest weights in a factor. This section takes another angle:
 how strongly does each volatility factor co-move with the **overall volatility of each industry**? The two answers

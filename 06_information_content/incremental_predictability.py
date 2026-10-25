@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Table 13 — incremental information of the volatility factors over other predictors (§5.2, benchmark 2).
+"""Table 13 — incremental information of the volatility factors over other predictors (§5.3, benchmark 2).
 
 The benchmark of the main text (benchmark 1) is plain HAR. This table uses a stricter benchmark: one of EPU / VIX / SKEW
 is first added to HAR (benchmark 2), and the question is whether the volatility factors still reduce forecast errors

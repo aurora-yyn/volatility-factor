@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Table 6 — multi-factor combinations (§4.2.3).
+"""Table 6 — multi-factor combinations (§4.2.4).
 
 Setup (as in Table 4):
   - Input: LV = log(RV²) of the 332 constituents
